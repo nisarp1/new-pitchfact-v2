@@ -1,0 +1,298 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>About — PITCHFACT · Design & digital transformation consultancy</title>
+    <meta name="description" content="Eight years. Three continents. One standard. Pitchfact is an independent consultancy of strategists, designers and engineers." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Instrument+Serif:ital@0;1&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --ink: #0a1626;
+        --ink-2: #0f1d31;
+        --ink-3: #16273f;
+        --line: rgba(238, 242, 248, 0.07);
+        --line-2: rgba(238, 242, 248, 0.14);
+        --paper: #f2eee5;
+        --paper-2: #e7e1d3;
+        --mute: rgba(238, 242, 248, 0.58);
+        --mute-2: rgba(238, 242, 248, 0.38);
+        --accent: #1fb6cc;
+        --accent-2: #b89968;
+        --accent-3: #ff5c2b;
+        --ok: #1fb6cc;
+        --font-display: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+        --font-mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+        --font-serif: "Instrument Serif", "Times New Roman", serif;
+      }
+
+      * { box-sizing: border-box; }
+      html, body { margin: 0; padding: 0; }
+      body {
+        background: var(--ink);
+        color: var(--paper);
+        font-family: var(--font-display);
+        font-feature-settings: "ss01", "ss02", "cv11";
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        overflow-x: hidden;
+      }
+      ::selection { background: var(--accent); color: var(--ink); }
+
+      .mono { font-family: var(--font-mono); letter-spacing: 0.02em; }
+      .serif-italic { font-family: var(--font-serif); font-style: italic; font-weight: 400; }
+
+      .tag {
+        display: inline-flex; align-items: center; gap: 8px;
+        font-family: var(--font-mono); font-size: 11px;
+        letter-spacing: 0.08em; text-transform: uppercase;
+        color: var(--mute);
+      }
+      .tag::before {
+        content: ""; width: 6px; height: 6px; background: var(--accent);
+        display: inline-block; box-shadow: 0 0 8px var(--accent);
+      }
+      .tag.no-dot::before { display: none; }
+
+      .idx {
+        font-family: var(--font-mono); font-size: 11px;
+        letter-spacing: 0.1em; color: var(--mute-2);
+      }
+
+      .wrap { max-width: 1480px; margin: 0 auto; padding: 0 56px; }
+      @media (max-width: 720px) { .wrap { padding: 0 24px; } }
+
+      .section {
+        position: relative;
+        padding: 120px 0;
+        border-top: 1px solid var(--line);
+      }
+      .section.first { border-top: 0; padding-top: 0; }
+      .section.tight { padding: 88px 0; }
+
+      .section-head {
+        display: grid; grid-template-columns: 1fr 2fr; gap: 48px;
+        align-items: end; margin-bottom: 64px;
+      }
+      @media (max-width: 900px) {
+        .section-head { grid-template-columns: 1fr; gap: 16px; }
+      }
+      .section-head h2 {
+        margin: 0;
+        font-size: clamp(36px, 5vw, 64px);
+        font-weight: 500;
+        line-height: 0.96;
+        letter-spacing: -0.02em;
+        text-wrap: balance;
+      }
+
+      .display {
+        font-family: var(--font-display);
+        font-weight: 500;
+        line-height: 0.92;
+        letter-spacing: -0.03em;
+        text-wrap: balance;
+      }
+
+      .btn {
+        display: inline-flex; align-items: center; gap: 10px;
+        height: 44px; padding: 0 18px;
+        border-radius: 999px;
+        font-family: var(--font-mono); font-size: 12px;
+        letter-spacing: 0.06em; text-transform: uppercase;
+        text-decoration: none;
+        border: 1px solid transparent; cursor: pointer;
+        transition: all 0.18s ease;
+      }
+      .btn-primary { background: var(--accent); color: var(--ink); }
+      .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 8px 24px color-mix(in oklab, var(--accent) 30%, transparent); }
+      .btn-ghost { background: transparent; color: var(--paper); border-color: var(--line-2); }
+      .btn-ghost:hover { border-color: var(--paper); }
+      .btn .arr { display: inline-block; transition: transform 0.18s ease; }
+      .btn:hover .arr { transform: translateX(3px); }
+
+      .card {
+        border: 1px solid var(--line);
+        background: var(--ink-2);
+        border-radius: 18px;
+        padding: 28px;
+        position: relative;
+        transition: border-color 0.2s ease, background 0.2s ease;
+      }
+      .card:hover { border-color: var(--line-2); background: var(--ink-3); }
+
+      .paper-section {
+        background: var(--paper); color: var(--ink);
+        padding: 120px 0;
+      }
+      .paper-section .tag { color: rgba(10,11,14,0.6); }
+      .paper-section .tag::before { background: var(--ink); box-shadow: none; }
+
+      .hr {
+        height: 1px; width: 100%;
+        background: var(--line);
+        border: 0; margin: 0;
+      }
+      .paper-section .hr { background: rgba(10,11,14,0.1); }
+
+      .pf { display: block; }
+      .pf rect { shape-rendering: crispEdges; }
+
+      @keyframes blink { 0%, 49% { opacity: 1; } 50%, 100% { opacity: 0; } }
+      .cursor { display: inline-block; width: 0.5ch; height: 1em; background: currentColor; vertical-align: -0.15em; animation: blink 1s steps(2) infinite; margin-left: 2px; }
+
+      .grid-overlay {
+        position: absolute; inset: 0; pointer-events: none;
+        background-image:
+          linear-gradient(var(--line) 1px, transparent 1px),
+          linear-gradient(90deg, var(--line) 1px, transparent 1px);
+        background-size: 88px 88px;
+        mask-image: radial-gradient(ellipse at 50% 30%, black 0%, transparent 70%);
+        -webkit-mask-image: radial-gradient(ellipse at 50% 30%, black 0%, transparent 70%);
+      }
+
+      @keyframes fadeup { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+      .fadeup { animation: fadeup 0.7s ease-out both; }
+
+      @keyframes wordIn {
+        0%   { transform: translateY(0.55em) skewY(6deg); filter: blur(6px); }
+        60%  { transform: translateY(0) skewY(0); filter: blur(0); }
+        100% { transform: translateY(0) skewY(0); filter: blur(0); }
+      }
+      .rot-word {
+        display: inline-block;
+        opacity: 1;
+        animation: wordIn 0.55s cubic-bezier(.2,.8,.2,1);
+        will-change: transform, opacity, filter;
+      }
+      .rot-wrap {
+        display: inline-block;
+        position: relative;
+        white-space: nowrap;
+        vertical-align: baseline;
+      }
+
+      .marquee {
+        display: flex;
+        overflow: hidden;
+        border-top: 1px solid var(--line);
+        border-bottom: 1px solid var(--line);
+        background: var(--ink);
+        position: relative;
+      }
+      .marquee-track {
+        display: flex;
+        flex-shrink: 0;
+        gap: 56px;
+        padding: 22px 28px;
+        animation: marquee 42s linear infinite;
+        white-space: nowrap;
+      }
+      @keyframes marquee {
+        from { transform: translateX(0); }
+        to   { transform: translateX(-100%); }
+      }
+      .marquee-item {
+        font-family: var(--font-display);
+        font-size: clamp(28px, 3.4vw, 48px);
+        font-weight: 500;
+        letter-spacing: -0.02em;
+        color: var(--paper);
+        display: inline-flex;
+        align-items: center;
+        gap: 28px;
+      }
+      .marquee-dot {
+        width: 14px; height: 14px;
+        background: var(--accent);
+        display: inline-block;
+        box-shadow: 0 0 16px var(--accent);
+      }
+
+      @keyframes pulse {
+        0%, 100% { transform: scale(1); opacity: 1; }
+        50%      { transform: scale(1.35); opacity: 0.7; }
+      }
+      .pulse { animation: pulse 1.8s ease-in-out infinite; }
+
+      @keyframes drift {
+        0%   { transform: translate(0, 0) rotate(0deg); }
+        50%  { transform: translate(6px, -8px) rotate(2deg); }
+        100% { transform: translate(0, 0) rotate(0deg); }
+      }
+      .drift { animation: drift 9s ease-in-out infinite; will-change: transform; }
+
+      .glow { filter: drop-shadow(0 0 24px color-mix(in oklab, var(--accent) 60%, transparent)); }
+
+      [data-motion="off"] .marquee-track,
+      [data-motion="off"] .drift,
+      [data-motion="off"] .pulse,
+      [data-motion="off"] .rot-word { animation: none !important; }
+
+      #app { min-height: 100vh; }
+
+      h1, h2, h3, h4, p { margin: 0; }
+      a { color: inherit; }
+
+      .nav {
+        position: sticky; top: 0; z-index: 50;
+        backdrop-filter: blur(18px) saturate(140%);
+        -webkit-backdrop-filter: blur(18px) saturate(140%);
+        background: color-mix(in oklab, var(--ink) 70%, transparent);
+        border-bottom: 1px solid var(--line);
+      }
+      .nav-inner {
+        display: flex; align-items: center; justify-content: space-between;
+        height: 64px;
+      }
+      .nav-links { display: flex; gap: 28px; }
+      .nav-links a {
+        font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.06em;
+        text-transform: uppercase; color: var(--mute); text-decoration: none;
+        transition: color 0.15s ease;
+      }
+      .nav-links a:hover { color: var(--paper); }
+      @media (max-width: 720px) { .nav-links { display: none; } }
+
+      .brand { display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--paper); }
+      .brand-mark { width: 32px; height: 32px; }
+      .brand-name {
+        font-family: var(--font-display); font-weight: 600;
+        font-size: 15px; letter-spacing: 0.18em;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app"></div>
+
+    <script
+      src="https://unpkg.com/react@18.3.1/umd/react.development.js"
+      integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js"
+      integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js"
+      integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y"
+      crossorigin="anonymous"
+    ></script>
+
+    <script src="pitchfact-logo-data-uri.js"></script>
+    <script type="text/babel" src="tweaks-panel.jsx"></script>
+    <script type="text/babel" src="pixel-face.jsx"></script>
+    <script type="text/babel" src="chatbot.jsx"></script>
+    <script type="text/babel" src="hero.jsx"></script>
+    <script type="text/babel" src="sections.jsx"></script>
+    <script type="text/babel" src="history-clients.jsx"></script>
+    <script type="text/babel" src="about.jsx"></script>
+  </body>
+</html>
