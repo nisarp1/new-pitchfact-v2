@@ -2,7 +2,7 @@
 // Components: AboutHero · MissionValues · Partners · AboutApp
 // Reuses: Nav (hero.jsx) · Marquee · History · ClientWall · CTA · Footer (sections + history-clients)
 
-const ABOUT_ACCENT = "#1fb6cc";
+const ABOUT_ACCENT = "#00b8e6";
 const ABOUT_FACE   = "solid";
 
 const MARQUEE_ITEMS = [
@@ -82,7 +82,7 @@ function AboutHero({ accent }) {
         {/* eyebrow */}
         <div className="fadeup" style={{ marginBottom: 52 }}>
           <span className="tag">
-            Independent consultancy · est. 2018 · Dubai · New Delhi
+            Independent consultancy · est. 2018 · Dubai · Gurgaon
           </span>
         </div>
 
@@ -215,17 +215,7 @@ function AboutHero({ accent }) {
         </div>
 
         {/* stats strip */}
-        <div
-          className="about-stats"
-          style={{
-            marginTop: 80,
-            display: "grid",
-            gridTemplateColumns: "repeat(4, 1fr)",
-            gap: 32,
-            paddingTop: 32,
-            borderTop: "1px solid var(--line)",
-          }}
-        >
+        <div className="about-stats">
           <AboutStat value="8"    label="years in practice · since 2018"  accent={accent} />
           <AboutStat value="75+"  label="organisations trusted"            accent={accent} />
           <AboutStat value="200+" label="transformation programmes"        accent={accent} />
@@ -267,7 +257,7 @@ const MVV = [
 
 function MissionValues({ accent }) {
   return (
-    <section className="paper-section" style={{ padding: "120px 0" }}>
+    <section className="paper-section" style={{ padding: "60px 0" }}>
       <div className="wrap">
         {/* head */}
         <div className="section-head" style={{ marginBottom: 64 }}>
@@ -386,10 +376,10 @@ const OFFICES = [
     note: "Primary office · EST 2018",
   },
   {
-    city: "New Delhi",
+    city: "Gurgaon",
     geo: "South Asia",
     role: "Engineering Hub",
-    address: "New Delhi, India",
+    address: "TOWER J FL.NO 306, WEMBLEY ESTATE ROSEWOOD,\nGurgaon, GURGAON, Gurgaon,\nGurgaon- 122018, Haryana, India",
     phone: null,
     whatsapp: null,
     email: "hello@pitchfact.co",
@@ -397,15 +387,15 @@ const OFFICES = [
     note: "Engineering & AI · EST 2020",
   },
   {
-    city: "Nairobi",
-    geo: "East Africa",
-    role: "Africa Practice",
-    address: "Nairobi, Kenya",
+    city: "Bengaluru",
+    geo: "South India",
+    role: "Government & Enterprise",
+    address: "Block E , # 403, Grand Edifice\nHoskote, Bengaluru : 562114",
     phone: null,
     whatsapp: null,
     email: "hello@pitchfact.co",
     hours: "Mon–Fri · 9AM–6PM",
-    note: "Public sector & Energy · EST 2022",
+    note: "Government & Enterprise · EST 2022",
   },
 ];
 

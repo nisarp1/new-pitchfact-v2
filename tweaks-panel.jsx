@@ -253,22 +253,56 @@ function TweaksPanel({ title = 'Tweaks', children }) {
     window.addEventListener('mouseup', up);
   };
 
-  if (!open) return null;
   return (
     <>
       <style>{__TWEAKS_STYLE}</style>
-      <div ref={dragRef} className="twk-panel" data-omelette-chrome=""
-           style={{ right: offsetRef.current.x, bottom: offsetRef.current.y }}>
-        <div className="twk-hd" onMouseDown={onDragStart}>
-          <b>{title}</b>
-          <button className="twk-x" aria-label="Close tweaks"
-                  onMouseDown={(e) => e.stopPropagation()}
-                  onClick={dismiss}>✕</button>
+
+      {/* Always-visible floating toggle pill */}
+      {!open && (
+        <button
+          onClick={() => setOpen(true)}
+          title="Open Tweaks"
+          style={{
+            position: "fixed", bottom: 20, right: 20, zIndex: 9999,
+            display: "flex", alignItems: "center", gap: 7,
+            height: 36, padding: "0 14px",
+            background: "rgba(10,22,38,0.88)",
+            border: "1px solid rgba(238,242,248,0.18)",
+            borderRadius: 999,
+            backdropFilter: "blur(12px)",
+            WebkitBackdropFilter: "blur(12px)",
+            color: "rgba(238,242,248,0.7)",
+            fontFamily: "var(--font-mono, monospace)",
+            fontSize: 11, letterSpacing: "0.08em",
+            cursor: "pointer",
+            boxShadow: "0 4px 20px rgba(0,0,0,0.4)",
+            transition: "border-color 0.15s, color 0.15s",
+          }}
+          onMouseEnter={(e) => { e.currentTarget.style.borderColor = "rgba(238,242,248,0.45)"; e.currentTarget.style.color = "rgba(238,242,248,1)"; }}
+          onMouseLeave={(e) => { e.currentTarget.style.borderColor = "rgba(238,242,248,0.18)"; e.currentTarget.style.color = "rgba(238,242,248,0.7)"; }}
+        >
+          <svg width="13" height="13" viewBox="0 0 13 13" fill="none" style={{ opacity: 0.75 }}>
+            <circle cx="6.5" cy="6.5" r="2.2" stroke="currentColor" strokeWidth="1.3"/>
+            <path d="M6.5 1v1.5M6.5 10.5V12M1 6.5h1.5M10.5 6.5H12M2.6 2.6l1.1 1.1M9.3 9.3l1.1 1.1M9.3 3.7L8.2 4.8M3.7 9.3l-1.1 1.1" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round"/>
+          </svg>
+          Tweaks
+        </button>
+      )}
+
+      {open && (
+        <div ref={dragRef} className="twk-panel" data-omelette-chrome=""
+             style={{ right: offsetRef.current.x, bottom: offsetRef.current.y }}>
+          <div className="twk-hd" onMouseDown={onDragStart}>
+            <b>{title}</b>
+            <button className="twk-x" aria-label="Close tweaks"
+                    onMouseDown={(e) => e.stopPropagation()}
+                    onClick={dismiss}>✕</button>
+          </div>
+          <div className="twk-body">
+            {children}
+          </div>
         </div>
-        <div className="twk-body">
-          {children}
-        </div>
-      </div>
+      )}
     </>
   );
 }

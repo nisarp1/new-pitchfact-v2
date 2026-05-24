@@ -1,7 +1,7 @@
 // app.jsx — root composition + Tweaks
 
 const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
-  "palette": ["#1fb6cc", "#0a1626", "#f2eee5"],
+  "palette": ["#00b8e6", "#060d18", "#f5f5f7"],
   "faceStyle": "solid",
   "heroPace": "medium",
   "density": "regular",
@@ -11,25 +11,53 @@ const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
 // Curated palette options — [accent, ink, paper]
 // Editorial, executive-grade palettes for a senior consultancy.
 const PALETTES = [
-  ["#1fb6cc", "#0a1626", "#f2eee5"], // Cyan / navy / cream (default — consultancy)
+  // ── Premium directions (new) ─────────────────────────────────────
+  ["#00b8e6", "#060d18", "#f5f5f7"], // Abyssal Ink — deepest midnight · electric cerulean · apple premium grey
+  ["#0ea5c9", "#091520", "#fbfbfd"], // Prussian Study — rich prussian blue · deep sky-teal · apple crisp white
+  ["#0cb4d4", "#0b1219", "#f4f4f5"], // Slate & Mercury — graphite slate · blue-shifted cyan · premium cement ash
+  // ── Existing options ─────────────────────────────────────────────
+  ["#1fb6cc", "#0a1626", "#f2eee5"], // Cyan / navy / cream (original)
   ["#b89968", "#10141d", "#f1ece1"], // Brass / graphite
   ["#3a6df0", "#0a1020", "#eef2f8"], // Sapphire / midnight
   ["#c1462e", "#10100e", "#f4ede0"], // Vermillion / coffee
   ["#1f7a5a", "#0a1410", "#eef3ec"], // Forest / fern
-  ["#0a1626", "#f2eee5", "#0a1626"], // Inverted — paper-led
 ];
+
+// Full variable specs for premium palettes — applied on top of accent/ink/paper
+// to give a true full-depth preview including derived ink-2/ink-3/mute/line values.
+const PALETTE_SPECS = {
+  "#00b8e6|#060d18|#f5f5f7": { ink2: "#0a1424", ink3: "#101e33", paper2: "#e5e5ea", rgba: "220,228,240", accent2: "#b89460" },
+  "#0ea5c9|#091520|#fbfbfd": { ink2: "#0e1d2d", ink3: "#152639", paper2: "#f0f0f2", rgba: "230,234,242", accent2: "#b89a5e" },
+  "#0cb4d4|#0b1219|#f4f4f5": { ink2: "#111a24", ink3: "#192433", paper2: "#e4e4e7", rgba: "215,225,235", accent2: "#b8975a" },
+};
 
 function applyPalette(palette, motion) {
   const [accent, ink, paper] = palette;
   const r = document.documentElement;
   r.style.setProperty("--accent", accent);
+  r.style.setProperty("--ok", accent);
   r.style.setProperty("--ink", ink);
   r.style.setProperty("--paper", paper);
+
+  // Apply full depth spec for premium palettes (ink-2/3, mute, line, paper-2)
+  const spec = PALETTE_SPECS[`${accent}|${ink}|${paper}`];
+  if (spec) {
+    r.style.setProperty("--ink-2",   spec.ink2);
+    r.style.setProperty("--ink-3",   spec.ink3);
+    r.style.setProperty("--paper-2", spec.paper2);
+    r.style.setProperty("--accent-2", spec.accent2);
+    r.style.setProperty("--line",    `rgba(${spec.rgba}, 0.07)`);
+    r.style.setProperty("--line-2",  `rgba(${spec.rgba}, 0.14)`);
+    r.style.setProperty("--mute",    `rgba(${spec.rgba}, 0.58)`);
+    r.style.setProperty("--mute-2",  `rgba(${spec.rgba}, 0.38)`);
+  } else {
+    // Reset derived vars to stylesheet defaults for non-premium palettes
+    ["--ink-2","--ink-3","--paper-2","--accent-2","--line","--line-2","--mute","--mute-2"]
+      .forEach((v) => r.style.removeProperty(v));
+  }
+
   // motion
-  r.style.setProperty(
-    "--motion-on",
-    motion === "off" ? "0" : "1"
-  );
+  r.style.setProperty("--motion-on", motion === "off" ? "0" : "1");
 }
 
 // Disable animations when motion="off"
@@ -73,71 +101,33 @@ function App() {
       />
       <Manifesto />
       <History accent={accent} />
+      <MetricsStrip accent={accent} tag="03 · Scale" metrics={[
+        { v: "8 yrs", l: "since founded · 2018" },
+        { v: "200+", l: "transformations shipped" },
+        { v: "75+", l: "organizations trusted" },
+        { v: "3", l: "continents · ME · Africa · Asia" }
+      ]} />
       <Services accent={accent} faceStyle={t.faceStyle} />
+      <StatementBreak 
+        accent={accent}
+        tag="Note"
+        dyads={[
+          ["execution", "liability"],
+          ["design", "document"],
+          ["engineering", "concept"],
+          ["evidence", "gamble"],
+        ]}
+      />
       <Capabilities accent={accent} />
       <Process accent={accent} />
-      <Trust accent={accent} faceStyle={t.faceStyle} />
+
+
+      <Accreditations accent={accent} />
       <ClientWall accent={accent} />
       <CTA accent={accent} faceStyle={t.faceStyle} />
       <Footer accent={accent} faceStyle={t.faceStyle} />
 
-      <TweaksPanel title="Tweaks">
-        <TweakSection label="Brand" />
-        <TweakColor
-          label="Palette"
-          value={t.palette}
-          options={PALETTES}
-          onChange={(v) => setTweak("palette", v)}
-        />
-        <TweakRadio
-          label="Mascot style"
-          value={t.faceStyle}
-          options={["solid", "outline", "glyph"]}
-          onChange={(v) => setTweak("faceStyle", v)}
-        />
 
-        <TweakSection label="Hero" />
-        <TweakRadio
-          label="Rotation"
-          value={t.heroPace}
-          options={["off", "slow", "medium", "fast"]}
-          onChange={(v) => setTweak("heroPace", v)}
-        />
-
-        <TweakSection label="System" />
-        <TweakRadio
-          label="Motion"
-          value={t.motion}
-          options={["off", "subtle", "moderate"]}
-          onChange={(v) => setTweak("motion", v)}
-        />
-
-        <TweakSection label="Mascot preview" />
-        <div
-          style={{
-            display: "flex",
-            gap: 12,
-            alignItems: "center",
-            justifyContent: "center",
-            padding: "14px 0 6px",
-            background: t.palette[1],
-            borderRadius: 10,
-          }}
-        >
-          <PixelFace size={56} variant={t.faceStyle} accent={accent} blink />
-          <span
-            style={{
-              fontFamily: "var(--font-display)",
-              fontSize: 13,
-              letterSpacing: "0.18em",
-              fontWeight: 600,
-              color: t.palette[2],
-            }}
-          >
-            mascot
-          </span>
-        </div>
-      </TweaksPanel>
     </>
   );
 }

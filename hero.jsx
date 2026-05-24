@@ -14,17 +14,22 @@ function Nav({ faceStyle, accent, homePrefix = "", contactHref = "#contact" }) {
   const currentFile = window.location.pathname.split("/").pop();
   const isServicesPage = currentFile === "services-v2.html";
 
+  const isHomePage = !currentFile || currentFile === "index.html";
+  const prefix = isHomePage ? "" : "index.html";
+
   const NAV_LINKS = [
-    { label: "Work",    href: `${homePrefix}#work`,    page: null,             dropdown: null },
-    { label: "Services",href: "services-v2.html",      page: "services-v2.html", dropdown: NAV_SERVICE_GROUPS },
-    { label: "Process", href: `${homePrefix}#process`, page: null,             dropdown: null },
+    { label: "Home",    href: "index.html",            page: "index.html",     dropdown: null, mobileHide: true },
     { label: "About",   href: "about-v2.html",         page: "about-v2.html",  dropdown: null },
+    { label: "Services",href: "services-v2.html",      page: "services-v2.html", dropdown: NAV_SERVICE_GROUPS },
+    { label: "Work",    href: `${prefix}#work`,        page: null,             dropdown: null },
+    { label: "Process", href: `${prefix}#process`,     page: null,             dropdown: null },
+    { label: "Contact", href: "contact.html",          page: "contact.html",   dropdown: null },
   ];
 
   return (
     <nav className="nav">
       <div className="wrap nav-inner">
-        <a className="brand" href={homePrefix || "#top"} style={{ textDecoration: "none" }}>
+        <a className="brand" href={homePrefix || "index.html"} style={{ textDecoration: "none" }}>
           <BrandLockup size={32} variant={faceStyle} accent={accent} />
         </a>
         <div className="nav-links">
@@ -60,6 +65,7 @@ function Nav({ faceStyle, accent, homePrefix = "", contactHref = "#contact" }) {
               <a
                 key={l.label}
                 href={l.href}
+                className={l.mobileHide ? "nav-hide-mobile" : undefined}
                 style={isActive ? { color: accent, pointerEvents: "none" } : {}}
               >
                 {l.label}
@@ -381,10 +387,34 @@ function HeroStat({ value, label, accent }) {
   );
 }
 
+// ── Typewriter hook ────────────────────────────────────────────────────────
+// Reveals `text` character by character at `speed` ms/char.
+// When `enabled` flips to false, jumps instantly to full text (for non-active slots).
+function useTypewriter(text, speed = 40, enabled = true) {
+  const len = (text || "").length;
+  const [count, setCount] = React.useState(enabled ? 0 : len);
+  React.useEffect(() => {
+    if (!enabled) { setCount(len); return; }
+    setCount(0);
+    if (!len) return;
+    let n = 0;
+    const id = setInterval(() => {
+      n++;
+      setCount(n);
+      if (n >= len) clearInterval(id);
+    }, speed);
+    return () => clearInterval(id);
+  }, [text, enabled, speed]);
+  const safe = Math.min(count, len);
+  return { typed: (text || "").slice(0, safe), done: safe >= len };
+}
+
 function Hero({ faceStyle, accent, pace = "medium" }) {
   const [i, setI] = useHeroRotation(pace);
   const [a, b] = HERO_DYADS[i];
   const ms = HERO_PACES[pace];
+  const twA = useTypewriter(a, 52);
+  const twB = useTypewriter(b, 58); // slightly different speed for natural stagger
   // Stable widths for both rotating slots so layout doesn't jump.
   const maxA = HERO_DYADS.reduce((m, d) => Math.max(m, d[0].length), 0);
   const maxB = HERO_DYADS.reduce((m, d) => Math.max(m, d[1].length), 0);
@@ -394,7 +424,6 @@ function Hero({ faceStyle, accent, pace = "medium" }) {
       style={{
         position: "relative",
         paddingTop: 72,
-        paddingBottom: 96,
         overflow: "hidden",
       }}
     >
@@ -414,7 +443,7 @@ function Hero({ faceStyle, accent, pace = "medium" }) {
           }}
         >
           <span className="tag">
-            Independent consultancy · est. 2018 · Dubai · New Delhi
+            Independent consultancy · est. 2018 · Dubai · Gurgaon
           </span>
           <span className="tag no-dot" style={{ color: "var(--mute-2)" }}>
             <span
@@ -431,22 +460,13 @@ function Hero({ faceStyle, accent, pace = "medium" }) {
         </div>
 
         {/* ── Two-column grid: hero content left · chatbot right ── */}
-        <div
-          className="fadeup hero-main"
-          style={{
-            display: "grid",
-            gridTemplateColumns: "1.35fr 1fr",
-            gap: 72,
-            alignItems: "end",
-            marginBottom: 96,
-          }}
-        >
+        <div className="fadeup hero-main">
           {/* Left: headline + sub-copy + pace strip + CTAs */}
           <div>
             <h1
               className="display"
               style={{
-                fontSize: "clamp(44px, 6.6vw, 82px)",
+                fontSize: "clamp(36px, 8vw, 82px)",
                 marginBottom: 28,
               }}
             >
@@ -454,8 +474,7 @@ function Hero({ faceStyle, accent, pace = "medium" }) {
                 Pitching the{" "}
                 <span className="rot-wrap" style={{ minWidth: `${maxA * 0.58}ch` }}>
                   <span
-                    key={`a-${i}`}
-                    className="rot-word serif-italic"
+                    className="serif-italic"
                     style={{
                       color: accent,
                       fontFamily: "var(--font-serif)",
@@ -463,17 +482,28 @@ function Hero({ faceStyle, accent, pace = "medium" }) {
                       letterSpacing: "-0.01em",
                     }}
                   >
-                    {a}
+                    {twA.typed}
+                    {!twA.done && (
+                      <span style={{
+                        display: "inline-block",
+                        width: "0.06em", height: "0.82em",
+                        background: accent,
+                        verticalAlign: "-0.06em",
+                        marginLeft: "0.06em",
+                        animation: "blink 0.7s steps(2) infinite",
+                      }} />
+                    )}
                   </span>
-                  <span style={{ color: "var(--paper)", fontFamily: "var(--font-display)", fontStyle: "normal" }}>.</span>
+                  {twA.done && (
+                    <span style={{ color: "var(--paper)", fontFamily: "var(--font-display)", fontStyle: "normal" }}>.</span>
+                  )}
                 </span>
               </span>
               <span style={{ display: "block" }}>
                 Engineering the{" "}
                 <span className="rot-wrap" style={{ minWidth: `${maxB * 0.58}ch` }}>
                   <span
-                    key={`b-${i}`}
-                    className="rot-word serif-italic"
+                    className="serif-italic"
                     style={{
                       color: accent,
                       fontFamily: "var(--font-serif)",
@@ -481,9 +511,21 @@ function Hero({ faceStyle, accent, pace = "medium" }) {
                       letterSpacing: "-0.01em",
                     }}
                   >
-                    {b}
+                    {twB.typed}
+                    {!twB.done && (
+                      <span style={{
+                        display: "inline-block",
+                        width: "0.06em", height: "0.82em",
+                        background: accent,
+                        verticalAlign: "-0.06em",
+                        marginLeft: "0.06em",
+                        animation: "blink 0.7s steps(2) infinite",
+                      }} />
+                    )}
                   </span>
-                  <span style={{ color: "var(--paper)", fontFamily: "var(--font-display)", fontStyle: "normal" }}>.</span>
+                  {twB.done && (
+                    <span style={{ color: "var(--paper)", fontFamily: "var(--font-display)", fontStyle: "normal" }}>.</span>
+                  )}
                 </span>
               </span>
             </h1>
@@ -537,106 +579,10 @@ function Hero({ faceStyle, accent, pace = "medium" }) {
           </div>
         </div>
 
-        {/* hero stats strip */}
-        <div
-          className="hero-stats"
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(4, 1fr)",
-            gap: 32,
-            paddingTop: 32,
-            borderTop: "1px solid var(--line)",
-          }}
-        >
-          <HeroStat value="8" label="years in practice · since 2018" accent={accent} />
-          <HeroStat value="75+" label="corporates & public bodies" accent={accent} />
-          <HeroStat value="200+" label="transformation programmes" accent={accent} />
-          <HeroStat value="3" label="continents · ME · Africa · Asia" accent={accent} />
-        </div>
+
       </div>
     </header>
   );
 }
-
-// Responsive collapse for hero grid on small screens
-const heroMediaCSS = `
-@media (max-width: 980px) {
-  .hero-main { grid-template-columns: 1fr !important; gap: 48px !important; align-items: start !important; }
-  .hero-stats { grid-template-columns: repeat(2, 1fr) !important; }
-}
-
-/* ── Nav dropdown ──────────────────────────────── */
-.nav-dd-wrap {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-}
-.nav-dd-trigger {
-  font-family: var(--font-mono);
-  font-size: 12px;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--mute);
-  text-decoration: none;
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  transition: color 0.15s ease;
-  cursor: pointer;
-}
-.nav-dd-trigger:hover { color: var(--paper); }
-.nav-dd-arrow {
-  font-size: 9px;
-  opacity: 0.6;
-  transition: transform 0.15s ease;
-}
-.nav-dd-wrap:hover .nav-dd-arrow { transform: rotate(180deg); }
-.nav-dd-panel {
-  display: none;
-  position: absolute;
-  top: 100%;
-  left: 50%;
-  transform: translateX(-50%);
-  padding-top: 12px;
-  min-width: 220px;
-  z-index: 100;
-}
-.nav-dd-panel-inner {
-  background: color-mix(in oklab, var(--ink-2) 96%, transparent);
-  border: 1px solid var(--line-2);
-  border-radius: 12px;
-  padding: 8px;
-  backdrop-filter: blur(18px) saturate(140%);
-  -webkit-backdrop-filter: blur(18px) saturate(140%);
-  box-shadow: 0 16px 48px rgba(0,0,0,0.4);
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
-.nav-dd-wrap:hover .nav-dd-panel { display: block; }
-.nav-dd-item {
-  font-family: var(--font-mono);
-  font-size: 11.5px;
-  letter-spacing: 0.04em;
-  color: var(--mute);
-  text-decoration: none;
-  padding: 9px 14px;
-  border-radius: 8px;
-  transition: background 0.12s ease, color 0.12s ease;
-  white-space: nowrap;
-}
-.nav-dd-item:hover {
-  background: var(--line-2);
-  color: var(--paper);
-}
-`;
-(function injectHeroCSS() {
-  if (typeof document === "undefined") return;
-  if (document.getElementById("__hero_media_css")) return;
-  const s = document.createElement("style");
-  s.id = "__hero_media_css";
-  s.textContent = heroMediaCSS;
-  document.head.appendChild(s);
-})();
 
 Object.assign(window, { Nav, Hero });

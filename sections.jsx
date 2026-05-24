@@ -9,11 +9,20 @@ function Manifesto() {
       <div className="wrap" style={{ position: "relative" }}>
         <div style={{ display: "grid", gridTemplateColumns: "1fr 2fr", gap: 56, alignItems: "start" }} className="manifesto-grid">
           <div>
-            <span className="tag">01 · The practice</span>
-            <div className="mono" style={{ fontSize: 11, color: "rgba(10,11,14,0.5)", marginTop: 32, lineHeight: 1.7 }}>
-              <div>Founded 2018 · Dubai &amp; New Delhi.</div>
-              <div>Independent. Privately held.</div>
-              <div style={{ marginTop: 8, color: "var(--ink)" }}>Senior practitioners only.</div>
+            <span className="tag">01 · Pitchfact</span>
+            <div className="mono" style={{ fontSize: 11, color: "rgba(10,11,14,0.5)", marginTop: 32, lineHeight: 1.6 }}>
+              <div style={{ color: "var(--ink)", fontWeight: 600, fontSize: 13, letterSpacing: "0.02em", textTransform: "lowercase" }}>pitch·fact</div>
+              <div style={{ marginBottom: 16, fontStyle: "italic", textTransform: "lowercase" }}>/ˈpɪtʃˌfækt/ · noun</div>
+              
+              <div style={{ color: "var(--ink)", textTransform: "lowercase" }}>1. pitch <span style={{ color: "rgba(10,11,14,0.4)", fontWeight: "normal" }}>(from pie *pik-)</span></div>
+              <div style={{ marginBottom: 12, paddingLeft: 10, borderLeft: "1px solid rgba(10,11,14,0.15)", textTransform: "none" }}>
+                To articulate a strategy, set a standard, or define a direction.
+              </div>
+
+              <div style={{ color: "var(--ink)", textTransform: "lowercase" }}>2. fact <span style={{ color: "rgba(10,11,14,0.4)", fontWeight: "normal" }}>(from l. factum)</span></div>
+              <div style={{ paddingLeft: 10, borderLeft: "1px solid rgba(10,11,14,0.15)", textTransform: "none" }}>
+                A thing done; an engineered, undeniable, and shipped outcome.
+              </div>
             </div>
           </div>
           <div>
@@ -33,9 +42,12 @@ function Manifesto() {
             <h2
               className="display"
               style={{
-                fontSize: "clamp(40px, 5.6vw, 84px)",
-                lineHeight: 1.02,
-                letterSpacing: "-0.025em",
+                margin: 0,
+                fontSize: "clamp(36px, 5vw, 64px)",
+                fontWeight: 500,
+                lineHeight: 0.96,
+                letterSpacing: "-0.02em",
+                textWrap: "balance",
                 marginBottom: 32,
                 color: "var(--ink)",
               }}
@@ -374,9 +386,9 @@ function Capabilities({ accent }) {
         <div className="section-head">
           <div><span className="tag">04 · Sectors</span></div>
           <h2 className="display">
-            We work across{" "}
-            <span className="serif-italic" style={{ color: "var(--accent)" }}>five</span>{" "}
-            sectors. We refuse the sixth.
+            Our practice is intentionally concentrated across{" "}
+            <span className="serif-italic" style={{ color: accent }}>five</span>{" "}
+            core sectors.
           </h2>
         </div>
 
@@ -594,31 +606,26 @@ function Trust({ accent, faceStyle }) {
   const q = QUOTES[active];
 
   return (
-    <section className="section" id="work" data-screen-label="Trust">
+    <section className="paper-section" id="work" data-screen-label="Trust">
       <div className="wrap">
-        <div className="section-head">
-          <div><span className="tag">06 · The record</span></div>
-          <h2 className="display">
-            Outcomes, on the{" "}
-            <span className="serif-italic" style={{ color: "var(--accent)" }}>
-              record.
-            </span>
-          </h2>
-        </div>
 
-        <div style={{ display: "grid", gridTemplateColumns: "1.6fr 1fr", gap: 48, alignItems: "stretch" }} className="trust-grid">
+
+        <div style={{ display: "grid", gridTemplateColumns: "1fr", gap: 48, alignItems: "stretch" }} className="trust-grid">
           {/* Quote */}
           <div
             style={{
-              border: "1px solid var(--line-2)",
+              border: "1px solid rgba(10, 11, 14, 0.1)",
               borderRadius: 18,
               padding: "44px 44px 36px",
-              background: "var(--ink-2)",
+              background: "rgba(10, 11, 14, 0.03)",
               position: "relative",
               display: "flex",
               flexDirection: "column",
               justifyContent: "space-between",
               minHeight: 320,
+              maxWidth: 960,
+              margin: "0 0 0 auto",
+              width: "100%",
             }}
           >
             <div
@@ -626,7 +633,7 @@ function Trust({ accent, faceStyle }) {
               style={{
                 fontSize: "clamp(22px, 2.4vw, 32px)",
                 lineHeight: 1.3,
-                color: "var(--paper)",
+                color: "var(--ink)",
                 textWrap: "pretty",
               }}
             >
@@ -634,8 +641,8 @@ function Trust({ accent, faceStyle }) {
             </div>
             <div style={{ display: "flex", alignItems: "end", justifyContent: "space-between", marginTop: 36, gap: 16, flexWrap: "wrap" }}>
               <div>
-                <div className="mono" style={{ fontSize: 12, color: "var(--paper)", marginBottom: 2 }}>{q.role}</div>
-                <div className="mono" style={{ fontSize: 11, color: "var(--mute-2)" }}>{q.org}</div>
+                <div className="mono" style={{ fontSize: 12, color: "var(--ink)", marginBottom: 2 }}>{q.role}</div>
+                <div className="mono" style={{ fontSize: 11, color: "rgba(10, 11, 14, 0.6)" }}>{q.org}</div>
               </div>
               <div style={{ display: "flex", gap: 6 }}>
                 {QUOTES.map((_, i) => (
@@ -646,7 +653,7 @@ function Trust({ accent, faceStyle }) {
                     style={{
                       width: 22,
                       height: 4,
-                      background: i === active ? accent : "var(--line-2)",
+                      background: i === active ? accent : "rgba(10, 11, 14, 0.15)",
                       border: 0,
                       borderRadius: 4,
                       cursor: "pointer",
@@ -657,43 +664,6 @@ function Trust({ accent, faceStyle }) {
               </div>
             </div>
           </div>
-
-          {/* Metrics column */}
-          <div style={{ display: "grid", gridTemplateRows: "repeat(3, 1fr)", gap: 16 }}>
-            {[
-              { v: "USD 420M", l: "programme value under management" },
-              { v: "18 mo", l: "median engagement, lead-partner held" },
-              { v: "94%", l: "programmes in service at handover" },
-            ].map((m) => (
-              <div
-                key={m.l}
-                style={{
-                  border: "1px solid var(--line)",
-                  borderRadius: 14,
-                  padding: "20px 22px",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "space-between",
-                  gap: 16,
-                }}
-              >
-                <div
-                  className="display"
-                  style={{
-                    fontSize: 32,
-                    letterSpacing: "-0.02em",
-                    color: accent,
-                    fontWeight: 500,
-                  }}
-                >
-                  {m.v}
-                </div>
-                <div className="mono" style={{ fontSize: 11, color: "var(--mute)", textAlign: "right", lineHeight: 1.4, letterSpacing: "0.04em", textTransform: "uppercase" }}>
-                  {m.l}
-                </div>
-              </div>
-            ))}
-          </div>
         </div>
       </div>
     </section>
@@ -703,7 +673,7 @@ function Trust({ accent, faceStyle }) {
 // ── CTA ───────────────────────────────────────────────────────────────────
 function CTA({ accent, faceStyle }) {
   return (
-    <section className="section" id="contact" data-screen-label="CTA" style={{ paddingBottom: 80 }}>
+    <section className="section" id="contact" data-screen-label="CTA" style={{ paddingBottom: 60 }}>
       <div className="wrap">
         <div
           style={{
@@ -754,10 +724,10 @@ function CTA({ accent, faceStyle }) {
               view, not a sales deck.
             </p>
             <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
-              <a className="btn btn-primary" href="mailto:partners@pitchfact.co">
-                partners@pitchfact.co <span className="arr">→</span>
+              <a className="btn btn-primary" href="mailto:hello@pitchfact.co">
+                hello@pitchfact.co <span className="arr">→</span>
               </a>
-              <a className="btn btn-ghost" href="mailto:partners@pitchfact.co">
+              <a className="btn btn-ghost" href="mailto:sales@pitchfact.co">
                 Request a partner briefing
               </a>
             </div>
@@ -792,8 +762,8 @@ function CTA({ accent, faceStyle }) {
               </div>
               {[
                 { name: "Dubai", role: "Managing Partner · GCC", line: "Strategy, Design" },
-                { name: "New Delhi", role: "Partner · South Asia", line: "Engineering, AI" },
-                { name: "Nairobi", role: "Partner · East Africa", line: "Public sector, Energy" },
+                { name: "Gurgaon", role: "Partner · South Asia", line: "Engineering, AI" },
+                { name: "Bengaluru", role: "Partner · South India", line: "Government & Enterprise" },
               ].map((p, i, arr) => (
                 <div
                   key={p.name}
@@ -860,6 +830,149 @@ function CTA({ accent, faceStyle }) {
   );
 }
 
+// ── Accreditations ───────────────────────────────────────────────────────
+function Accreditations({ accent }) {
+  const [modalOpen, setModalOpen] = React.useState(false);
+
+  return (
+    <>
+      <section className="section" id="accreditations" style={{ padding: "80px 0" }}>
+        <div className="wrap">
+          <div className="section-head" style={{ marginBottom: 48 }}>
+            <div>
+              <span className="tag">Accreditations</span>
+            </div>
+            <h2 className="display" style={{ fontSize: "clamp(28px, 3.5vw, 48px)", letterSpacing: "-0.01em" }}>
+              Recognised by <span className="serif-italic" style={{ color: accent }}>Startup India.</span>
+            </h2>
+          </div>
+
+          <div
+            style={{
+              display: "flex",
+              flexWrap: "wrap",
+              gap: 40,
+              alignItems: "stretch",
+              background: "var(--ink-2)",
+              border: "1px solid var(--line-2)",
+              borderRadius: 16,
+              padding: "clamp(24px, 4vw, 40px)",
+            }}
+          >
+            <div style={{ flex: "1 1 300px", display: "flex", flexDirection: "column" }}>
+              <h3 className="display" style={{ fontSize: 22, color: "var(--paper)", marginBottom: 12, lineHeight: 1.3 }}>
+                Department for Promotion of Industry and Internal Trade
+              </h3>
+              <p style={{ fontSize: 15, lineHeight: 1.6, color: "var(--mute)", marginBottom: 24, textWrap: "pretty" }}>
+                Pitchfact Technologies LLP is officially recognized as a startup by the DPIIT under the Ministry of Commerce & Industry, Government of India. Recognized for our work in the <strong>IT Services</strong> and <strong>IT Consulting</strong> sectors.
+              </p>
+              <div style={{ display: "flex", gap: 32, marginBottom: "auto", paddingBottom: 32 }}>
+                <div>
+                  <div className="mono" style={{ fontSize: 10, color: "var(--mute-2)", marginBottom: 6, textTransform: "uppercase", letterSpacing: "0.08em" }}>Certificate No.</div>
+                  <div className="mono" style={{ fontSize: 13, color: "var(--paper)" }}>DIPP258196</div>
+                </div>
+                <div>
+                  <div className="mono" style={{ fontSize: 10, color: "var(--mute-2)", marginBottom: 6, textTransform: "uppercase", letterSpacing: "0.08em" }}>Valid Upto</div>
+                  <div className="mono" style={{ fontSize: 13, color: "var(--paper)" }}>21-11-2035</div>
+                </div>
+              </div>
+              <div>
+                <button
+                  className="btn btn-ghost"
+                  onClick={() => setModalOpen(true)}
+                >
+                  View official certificate
+                </button>
+              </div>
+            </div>
+            
+            <div
+              style={{
+                flex: "1 1 360px",
+                borderRadius: 12,
+                overflow: "hidden",
+                border: "1px solid var(--line)",
+                cursor: "pointer",
+                position: "relative",
+                minHeight: 260,
+                background: "var(--ink)",
+              }}
+              onClick={() => setModalOpen(true)}
+            >
+              {/* Certificate image — add startup-india-certificate.png to root folder */}
+              <img
+                src="./startup-india-certificate.png"
+                alt="Startup India Certificate"
+                style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center", display: "block", opacity: 0.85, transition: "opacity 0.2s" }}
+                onMouseEnter={(e) => e.currentTarget.style.opacity = 1}
+                onMouseLeave={(e) => e.currentTarget.style.opacity = 0.85}
+                onError={(e) => { e.currentTarget.style.display = "none"; }}
+              />
+              {/* Expand icon */}
+              <div style={{ position: "absolute", bottom: 14, right: 14 }}>
+                <div style={{ width: 36, height: 36, borderRadius: "50%", background: "rgba(0,0,0,0.6)", backdropFilter: "blur(4px)", display: "flex", alignItems: "center", justifyContent: "center", border: "1px solid rgba(255,255,255,0.1)" }}>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--paper)" strokeWidth="2">
+                    <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {modalOpen && (
+        <div
+          style={{
+            position: "fixed",
+            inset: 0,
+            zIndex: 9999,
+            background: "rgba(6, 13, 24, 0.95)",
+            backdropFilter: "blur(8px)",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            padding: "clamp(20px, 4vw, 40px)",
+          }}
+          onClick={() => setModalOpen(false)}
+        >
+          <div style={{ position: "absolute", top: 24, right: 32 }}>
+            <button
+              onClick={() => setModalOpen(false)}
+              style={{
+                background: "transparent",
+                border: 0,
+                color: "var(--mute)",
+                cursor: "pointer",
+                fontFamily: "var(--font-mono)",
+                fontSize: 12,
+                textTransform: "uppercase",
+                letterSpacing: "0.1em",
+              }}
+            >
+              Close ✕
+            </button>
+          </div>
+          <img
+            src="./startup-india-certificate.png"
+            alt="Startup India Certificate"
+            style={{
+              maxWidth: "100%",
+              maxHeight: "85vh",
+              objectFit: "contain",
+              borderRadius: 8,
+              boxShadow: "0 24px 64px rgba(0,0,0,0.4)",
+              border: "1px solid var(--line-2)",
+            }}
+            onClick={(e) => e.stopPropagation()}
+          />
+        </div>
+      )}
+    </>
+  );
+}
+
 // ── Footer ────────────────────────────────────────────────────────────────
 function Footer({ accent, faceStyle, homePrefix = "" }) {
   return (
@@ -881,7 +994,7 @@ function Footer({ accent, faceStyle, homePrefix = "" }) {
           className="footer-grid"
         >
           <div>
-            <a className="brand" href={homePrefix ? homePrefix : "#top"} style={{ textDecoration: "none" }}>
+            <a className="brand" href={homePrefix ? homePrefix : "index.html"} style={{ textDecoration: "none" }}>
               <BrandLockup size={36} variant={faceStyle} accent={accent} />
             </a>
             <p
@@ -898,6 +1011,14 @@ function Footer({ accent, faceStyle, homePrefix = "" }) {
               Strategy, design and engineering &mdash; senior teams, end-to-end,
               in service of the firm.
             </p>
+            <div style={{ marginTop: 24, display: "flex", alignItems: "center", gap: 8 }}>
+              <span className="mono" style={{ fontSize: 10, letterSpacing: "0.08em", textTransform: "uppercase", color: accent, background: "var(--ink-2)", padding: "4px 8px", borderRadius: 4, border: "1px solid var(--line)" }}>
+                Recognised Startup
+              </span>
+              <span className="mono" style={{ fontSize: 10, letterSpacing: "0.06em", color: "var(--mute)" }}>
+                by Startup India
+              </span>
+            </div>
           </div>
 
           {[
@@ -914,17 +1035,17 @@ function Footer({ accent, faceStyle, homePrefix = "" }) {
               h: "Firm",
               links: [
                 { label: "About",    href: "about-v2.html" },
-                { label: "Sectors",  href: "#sectors" },
-                { label: "Process",  href: "#process" },
-                { label: "Careers",  href: "careers-v2.html" },
+                { label: "Sectors",  href: "index.html#sectors" },
+                { label: "Process",  href: "index.html#process" },
+                { label: "Contact",  href: "contact.html" },
               ],
             },
             {
               h: "Offices",
               links: [
                 { label: "Dubai · GCC",            href: "about-v2.html#offices" },
-                { label: "New Delhi · South Asia",  href: "about-v2.html#offices" },
-                { label: "Nairobi · East Africa",   href: "about-v2.html#offices" },
+                { label: "Gurgaon · South Asia",  href: "about-v2.html#offices" },
+                { label: "Bengaluru · South India",   href: "about-v2.html#offices" },
                 { label: "partners@pitchfact.co",   href: "mailto:partners@pitchfact.co" },
               ],
             },
@@ -977,9 +1098,9 @@ function Footer({ accent, faceStyle, homePrefix = "" }) {
             letterSpacing: "0.06em",
           }}
         >
-          <span>© 2026 PITCHFACT CONSULTING</span>
+          <span>© 2026 Pitchfact Technologies LLP</span>
           <span>SENIOR TEAMS · END-TO-END · IN SERVICE</span>
-          <span>ESTABLISHED 2018 · DUBAI · NEW DELHI</span>
+          <span>ESTABLISHED 2018 · DUBAI · GURGAON</span>
         </div>
       </div>
     </footer>
@@ -994,6 +1115,9 @@ const sectionMediaCSS = `
   .stack-grid > div { border-right: none !important; border-bottom: 1px solid var(--line) !important; }
   .process-grid { grid-template-columns: repeat(2, 1fr) !important; }
   .process-grid > div { border-right: none !important; border-bottom: 1px solid var(--line) !important; }
+}
+@media (max-width: 1000px) {
+  .cta-card { grid-template-columns: 1fr !important; padding: 48px 32px !important; gap: 40px !important; }
 }
 @media (max-width: 900px) {
   .manifesto-grid { grid-template-columns: 1fr !important; gap: 24px !important; }
@@ -1018,4 +1142,155 @@ const sectionMediaCSS = `
   document.head.appendChild(s);
 })();
 
-Object.assign(window, { Manifesto, Services, Capabilities, Process, Trust, CTA, Footer });
+function AnimatedMetric({ text }) {
+  const match = String(text).match(/^(.*?)(\d+)(.*)$/);
+  if (!match) return <span style={{ color: "var(--accent)" }}>{text}</span>;
+
+  const prefix = match[1];
+  const target = parseInt(match[2], 10);
+  const suffix = match[3];
+
+  const [count, setCount] = React.useState(0);
+  const ref = React.useRef(null);
+
+  React.useEffect(() => {
+    const observer = new IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting) {
+        let startTime;
+        const duration = 2000;
+        const step = (timestamp) => {
+          if (!startTime) startTime = timestamp;
+          const progress = Math.min((timestamp - startTime) / duration, 1);
+          const easeOutQuart = 1 - Math.pow(1 - progress, 4);
+          setCount(Math.floor(easeOutQuart * target));
+          if (progress < 1) {
+            requestAnimationFrame(step);
+          } else {
+            setCount(target);
+          }
+        };
+        requestAnimationFrame(step);
+        observer.disconnect();
+      }
+    });
+    if (ref.current) observer.observe(ref.current);
+    return () => observer.disconnect();
+  }, [target]);
+
+  return (
+    <span ref={ref}>
+      {prefix}<span style={{ color: "#00b8e6", textShadow: "0 0 20px rgba(0, 184, 230, 0.4)" }}>{count}</span>{suffix}
+    </span>
+  );
+}
+
+// ── Interstitial Separators ────────────────────────────────────────────────
+function MetricsStrip({ metrics, accent, tag="Metrics" }) {
+  return (
+    <section className="paper-section" style={{ padding: "60px 0", borderTop: "1px solid rgba(10,11,14,0.12)" }}>
+      <div className="wrap">
+        <div className="metrics-strip-outer">
+          <div>
+            <span className="tag" style={{ color: "rgba(10,11,14,0.6)" }}>{tag}</span>
+          </div>
+          <div
+            className="metrics-strip-grid"
+            style={{ "--metric-count": metrics.length }}
+          >
+            {metrics.map((m, i) => (
+              <div key={i} className="metrics-col">
+                <div className="display metrics-value" style={{ color: "var(--ink)" }}>
+                  <AnimatedMetric text={m.v} />
+                </div>
+                <div className="mono metrics-label">
+                  {m.l}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ── Typewriter hook ────────────────────────────────────────────────────────
+function useTypewriter(text, speed = 40, enabled = true) {
+  const len = (text || "").length;
+  const [count, setCount] = React.useState(enabled ? 0 : len);
+  React.useEffect(() => {
+    if (!enabled) { setCount(len); return; }
+    setCount(0);
+    if (!len) return;
+    let n = 0;
+    const id = setInterval(() => {
+      n++;
+      setCount(n);
+      if (n >= len) clearInterval(id);
+    }, speed);
+    return () => clearInterval(id);
+  }, [text, enabled, speed]);
+  const safe = Math.min(count, len);
+  return { typed: (text || "").slice(0, safe), done: safe >= len };
+}
+
+function RotatingStatement({ dyads, accent }) {
+  const [i, setI] = React.useState(0);
+  React.useEffect(() => {
+    const id = setInterval(() => setI((v) => (v + 1) % dyads.length), 4500);
+    return () => clearInterval(id);
+  }, [dyads]);
+
+  const [w1, w2] = dyads[i];
+  const tw1 = useTypewriter(w1, 52);
+  const tw2 = useTypewriter(w2, 58);
+
+  const max1 = dyads.reduce((m, d) => Math.max(m, d[0].length), 0);
+  const max2 = dyads.reduce((m, d) => Math.max(m, d[1].length), 0);
+
+  return (
+    <>
+      <span style={{ display: "inline-block" }}>Strategy without</span>{" "}
+      <span className="rot-wrap" style={{ minWidth: `${max1 * 0.58}ch`, display: "inline-block" }}>
+        <span className="serif-italic" style={{ color: accent, fontFamily: "var(--font-serif)" }}>
+          {tw1.typed}
+          {!tw1.done && <span className="cursor" style={{ background: accent }} />}
+        </span>
+      </span>
+      <br/>is a{" "}
+      <span className="rot-wrap" style={{ minWidth: `${max2 * 0.58}ch`, display: "inline-block" }}>
+        <span className="serif-italic" style={{ color: accent, fontFamily: "var(--font-serif)" }}>
+          {tw2.typed}
+          {!tw2.done && <span className="cursor" style={{ background: accent }} />}
+        </span>
+        {tw2.done && <span style={{ color: "var(--ink)", fontFamily: "var(--font-display)", fontStyle: "normal" }}>.</span>}
+      </span>
+    </>
+  );
+}
+
+function StatementBreak({ text, subtext, tag = "Note", accent, dyads }) {
+  return (
+    <section className="paper-section" style={{ padding: "60px 0", borderTop: "1px solid rgba(10,11,14,0.12)" }}>
+      <div className="wrap">
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 2fr", gap: 48, alignItems: "start" }} className="manifesto-grid">
+          <div>
+            <span className="tag" style={{ color: "rgba(10,11,14,0.6)" }}>{tag}</span>
+          </div>
+          <div>
+            <h2 className="display" style={{ fontSize: "clamp(36px, 5vw, 64px)", lineHeight: 0.98, letterSpacing: "-0.02em", color: "var(--ink)", textWrap: "balance", fontWeight: 500 }}>
+              {dyads ? <RotatingStatement dyads={dyads} accent={accent} /> : text}
+            </h2>
+            {subtext && (
+              <div className="mono" style={{ marginTop: 32, color: "rgba(10,11,14,0.5)", fontSize: 12, letterSpacing: "0.1em", textTransform: "uppercase" }}>
+                {subtext}
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+Object.assign(window, { Manifesto, Services, Capabilities, Process, Accreditations, CTA, Footer, MetricsStrip, StatementBreak });

@@ -12,7 +12,7 @@ const HISTORY = [
     year: "2020",
     title: "Growth & Expansion",
     accent: "global",
-    body: "A second office in New Delhi. The firm becomes a multi-geography partner — 75+ corporates and public bodies, 200+ programmes.",
+    body: "A second office in Gurgaon. The firm becomes a multi-geography partner — 75+ corporates and public bodies, 200+ programmes.",
   },
   {
     year: "2022",
@@ -162,43 +162,6 @@ function History({ accent }) {
           </div>
         </div>
 
-        {/* footnote stats */}
-        <div
-          style={{
-            marginTop: 32,
-            display: "grid",
-            gridTemplateColumns: "repeat(4, 1fr)",
-            gap: 16,
-          }}
-          className="history-stats"
-        >
-          {[
-            { v: "8 yrs", l: "since founded · 2018" },
-            { v: "200+", l: "transformations shipped" },
-            { v: "75+", l: "organizations trusted" },
-            { v: "3", l: "continents · ME · Africa · Asia" },
-          ].map((s) => (
-            <div
-              key={s.l}
-              style={{
-                border: "1px solid var(--line)",
-                borderRadius: 12,
-                padding: "16px 18px",
-                display: "flex",
-                alignItems: "baseline",
-                justifyContent: "space-between",
-                gap: 12,
-              }}
-            >
-              <div className="display" style={{ fontSize: 22, fontWeight: 500, letterSpacing: "-0.01em", color: accent }}>
-                {s.v}
-              </div>
-              <div className="mono" style={{ fontSize: 10.5, color: "var(--mute)", letterSpacing: "0.06em", textTransform: "uppercase", textAlign: "right", lineHeight: 1.4 }}>
-                {s.l}
-              </div>
-            </div>
-          ))}
-        </div>
       </div>
     </section>
   );

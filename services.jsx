@@ -1,6 +1,6 @@
 // services.jsx — Pitchfact v2 Services inner page
 
-const SERVICES_ACCENT = "#1fb6cc";
+const SERVICES_ACCENT = "#00b8e6";
 const SERVICES_FACE   = "solid";
 
 const MARQUEE_ITEMS = [
@@ -50,15 +50,7 @@ function ServicesHero({ accent }) {
           </span>
         </div>
 
-        <div
-          className="fadeup"
-          style={{
-            display: "grid",
-            gridTemplateColumns: "1.4fr 1fr",
-            gap: 80,
-            alignItems: "end",
-          }}
-        >
+        <div className="fadeup services-hero-grid">
           {/* left: headline + body */}
           <div>
             <h1
@@ -158,16 +150,7 @@ function ServicesHero({ accent }) {
         </div>
 
         {/* stat strip */}
-        <div
-          style={{
-            marginTop: 80,
-            display: "grid",
-            gridTemplateColumns: "repeat(4, 1fr)",
-            gap: 32,
-            paddingTop: 32,
-            borderTop: "1px solid var(--line)",
-          }}
-        >
+        <div className="services-stat-strip">
           {[
             { v: "12",  l: "service lines across 4 practices" },
             { v: "200+", l: "programmes delivered" },
