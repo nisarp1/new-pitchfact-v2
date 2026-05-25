@@ -379,7 +379,7 @@ const OFFICES = [
     city: "Gurgaon",
     geo: "South Asia",
     role: "Engineering Hub",
-    address: "TOWER J FL.NO 306, WEMBLEY ESTATE ROSEWOOD,\nGurgaon, GURGAON, Gurgaon,\nGurgaon- 122018, Haryana, India",
+    address: "Tower J-306, Wembley Estate,\nGurgaon, Haryana, India",
     phone: null,
     whatsapp: null,
     email: "hello@pitchfact.co",
